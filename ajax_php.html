@@ -1,0 +1,35 @@
+<html>
+<head>
+<script>
+function showHint(str) {
+  if (str.length == 0) {
+    document.getElementById("txtHint").innerHTML = "";
+	  document.getElementById("selHint").innerHTML = "";
+    return;
+  } else {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("txtHint").innerHTML = this.responseText;
+		document.getElementById("selHint").innerHTML = this.responseText;
+      }
+    };
+    xmlhttp.open("GET", "get_hint.php?q=" + str, true);
+    xmlhttp.send();
+  }
+}
+</script>
+</head>
+<body>
+
+<p><b>Type a name of hijab in the input field below:</b></p>
+<form action="">
+  <label for="fhijab">type:</label>
+  <input type="text" id="fname" name="fhijab" onkeyup="showHint(this.value)">
+</form>
+<p>Suggestions: <span id="txtHint"></span></p>
+<select> id="selHint"></select>
+
+
+</body>
+</html>
